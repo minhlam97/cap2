@@ -38,7 +38,7 @@ urlpatterns = [
     path("view-following/", view_following),
     path("follow-user/", follow_user),
 
-    #lâm thêm path
+    # Thái thêm
     path("list_song_moods",views.list_song_moods),
-    path('seach_song', views.seach_song.as_view()),
+    path('search_song', views.search_song.as_view()),
 ]
