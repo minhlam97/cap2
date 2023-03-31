@@ -11,7 +11,9 @@ class SongMood(models.Model):
         ("Sad", "Sad"),
         ("Angry", "Angry"),
         ("Surprised", "Surprised"),
-        ("Neutral", "Neutral")
+        ("Neutral", "Neutral"),
+        ("Fear", "Fear"),
+        ("Disgust","Disgust"),
     )
 
     mood = models.CharField(choices=MOOD_CHOICES, max_length=50)
