@@ -33,12 +33,7 @@ class Command(BaseCommand):
                                 dg = str(c).split("/")[-2].capitalize()
                                 sm = SongMood.objects.filter(mood=dg).first()
                                 print(sm, dg)
-                                sg = Song()
-                                sg.name = ff[1].split(".")[0]
-                                sg.save()
-                                sg.mood.add(sm.pk)
-                                sg.mp3_file.save(ff[1], d_m, save=True)
-                                sg.poster.save("cover.jpg", d_c, save=True)
+
         except Exception as e:
             raise CommandError(str(e))
 
