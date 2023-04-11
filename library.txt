@@ -1,0 +1,7 @@
+django
+extensions
+pip install django-cors-headers
+pip install djangorestframework
+pip install django-allauth
+pip install deepface
+flask
