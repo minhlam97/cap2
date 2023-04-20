@@ -95,6 +95,15 @@ class Play_list_add(models.Model):
         return self.name
 
 
+class Late_song(models.Model):
+    
+    name = models.CharField(max_length=150, blank=True, null=True)
+    artist = models.CharField(max_length=150, blank=True, null=True)
+    duration = models.CharField(max_length=10, blank=True, null=True)
+    poster = models.CharField(max_length=350, blank=True, null=True)
+    mp3_file = models.CharField(max_length=350, blank=True, null=True)
+    id_Song = models.CharField(max_length=150, blank=True, null=True)
+    User_Link = models.ForeignKey('User',related_name='User_Link_Late_song',on_delete=models.CASCADE,null=True,blank=True)
 
     def __str__(self):
         return self.name
