@@ -1,77 +1,73 @@
 <template>
-  <div class="flex flex-col text-white h-full w-full gap-5">
-    <div class="flex flex-col h-full w-full gap-3">
+  <div
+    class="flex flex-col text-white min-h-screen px-5 py-5 max-w-screen w-full gap-5"
+  >
+    <div class="flex flex-col w-full gap-3">
       <div class="flex gap-1 text-bold items-center">
         <h1>Xin chào</h1>
-        <h1 class="text-sky-600">Lam97</h1>
+        <h1 class="text-sky-600">{{ counter.Data_User.username }}</h1>
         <h1>, nghe nhạc</h1>
       </div>
-      <div class="flex fill-gray-300 justify-between h-full w-full">
-        <svg
-          role="img"
-          height="16"
-          width="16"
-          aria-hidden="true"
-          class="Svg-sc-ytk21e-0 kcBZLg IYDlXmBmmUKHveMzIPCF"
-          viewBox="0 0 16 16"
-          data-encore-id="icon"
+      <div id="cjss1" class="flex w-full items-center overflow-x-auto">
+        <div
+          v-for="(i, index) in counter.Get_late_song"
+          :class="{ 'ml-[200px]': index > 0 }"
+          class="flex text-gray-100 py-3 items-center"
         >
-          <path
-            d="M11.03.47a.75.75 0 0 1 0 1.06L4.56 8l6.47 6.47a.75.75 0 1 1-1.06 1.06L2.44 8 9.97.47a.75.75 0 0 1 1.06 0z"
-          ></path>
-        </svg>
-        <h1>{{ counter.show_Ten_nhac }}</h1>
-        <svg
-          role="img"
-          height="16"
-          width="16"
-          aria-hidden="true"
-          class="Svg-sc-ytk21e-0 kcBZLg IYDlXmBmmUKHveMzIPCF"
-          viewBox="0 0 16 16"
-          data-encore-id="icon"
-        >
-          <path
-            d="M4.97.47a.75.75 0 0 0 0 1.06L11.44 8l-6.47 6.47a.75.75 0 1 0 1.06 1.06L13.56 8 6.03.47a.75.75 0 0 0-1.06 0z"
-          ></path>
-        </svg>
+          <div
+            v-on:click="
+              Play_all();
+              Get_data_song_1(i);
+            "
+            class="flex flex-col items-center gap-3 cursor-pointer"
+          >
+            <img :src="i.poster" class="min-w-[50px] h-[50px] rounded" />
+            <h1 class="text-[16px]">{{ i.name }}</h1>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="flex h-[500px] grow gap-5">
-      <div id="cjss" class="w-2/3 flex flex-col overflow-auto">
-        <h1 class="text-[18px]">Bài hát dựa trên tâm trạng của bạn</h1>
-        <div class="flex items-center gap-2">
-          <h1 class="text-[16px]">Danh sách bài hát</h1>
-          <h1 class="text-blue-600 text-[18px] font-bold">
-            {{ counter.Data_Feeling["Data"] }}
-          </h1>
-        </div>
-        <div class="text-white h-full w-full flex flex-col">
-          <div
-            class="grid grid-cols-3 border-b-[1px] border-zinc-600 py-5 items-center font-bold"
-          >
-            <h1 class="flex w-[250px] ml-[50px]">STT</h1>
-            <h1 class="flex w-[250px] ml-[50px]">Tên bài hát</h1>
-            <h1>Nghệ sĩ</h1>
+    <div class="flex min-h-full grow gap-5 overflow-auto">
+      <div class="flex flex-col w-2/3">
+        <div id="cjss" class="flex flex-col overflow-auto">
+          <h1 class="text-[18px]">Bài hát dựa trên tâm trạng của bạn</h1>
+          <div class="flex items-center gap-2 min-h-[50px]">
+            <h1 class="text-[16px]">Danh sách bài hát</h1>
+            <h1 class="text-blue-600 text-[18px] font-bold">
+              {{ counter.Data_Feeling["Data"] }}
+            </h1>
           </div>
-          <div
-            v-for="i in counter.Data_Feeling['List_Song']"
-            v-on:click="
-              counter.Play();
-              Get_data_song(i);
-            "
-            class="grid grid-cols-3 text-gray-300 border-b-[1px] border-zinc-600 items-center font-normal py-1 cursor-pointer"
-          >
-            <img
-              :src="counter.domain_Backend + i.poster"
-              class="w-[100px] rounded"
-            />
-            <h1 class="flex w-[250px] ml-[50px]">{{ i.name }}</h1>
-            <h1>{{ i.artist }}</h1>
+          <div class="text-white h-full w-full flex flex-col">
+            <div
+              class="grid grid-cols-3 border-b-[1px] border-zinc-600 py-5 items-center font-bold"
+            >
+              <h1 class="flex w-[250px] ml-[50px]"></h1>
+              <h1 class="flex w-[250px] ml-[50px]">Tên bài hát</h1>
+              <h1>Nghệ sĩ</h1>
+            </div>
+            <div
+              v-for="(i, index) in counter.Data_Feeling['List_Song']"
+              v-on:click="
+                Play_all();
+                Get_data_song(i);
+              "
+              class="grid grid-cols-3 text-gray-300 border-b-[1px] border-zinc-600 items-center font-normal py-1 cursor-pointer"
+            >
+              <div class="flex gap-5 items-center">
+                <h1>{{ index + 1 }}</h1>
+                <img
+                  :src="counter.domain_Backend + i.poster"
+                  class="w-[50px] h-[50px] rounded"
+                />
+              </div>
+              <h1 class="flex w-[250px] ml-[50px]">{{ i.name }}</h1>
+              <h1>{{ i.artist }}</h1>
+            </div>
           </div>
         </div>
       </div>
       <div
-        class="w-1/3 flex flex-col items-center gap-5 h-full grow shrink-0 mt-[80px]"
+        class="w-1/3 flex flex-col items-center gap-5 h-full grow shrink-0 mt-[30px]"
       >
         <div class="flex relative">
           <video
@@ -119,13 +115,43 @@ export default {
   },
   mounted: function () {
     this.Play_Video();
+    this.counter.get_song_play_list();
+    this.counter.get_late_song();
   },
   methods: {
+    async Play_all() {
+      await this.counter.Play();
+
+      this.counter.duration_mp3 = document.getElementById(
+        "nhac"
+      ).onloadedmetadata = () => {
+        this.counter.duration_mp3 = document.getElementById("nhac").duration;
+        this.counter.duration_mp3 = Math.floor(this.counter.duration_mp3);
+        if (this.counter.duration_mp3 % 60 >= 10) {
+          this.counter.length =
+            Math.floor(this.counter.duration_mp3 / 60) +
+            ":" +
+            (this.counter.duration_mp3 % 60);
+        } else {
+          this.counter.length =
+            Math.floor(this.counter.duration_mp3 / 60) +
+            ":0" +
+            (this.counter.duration_mp3 % 60);
+        }
+      };
+    },
     Get_data_song(i) {
       this.counter.Play_nhac.URL = this.counter.domain_Backend + i.mp3_file;
       this.counter.Play_nhac.Name_song = i.name;
       this.counter.Play_nhac.Name_artist = i.artist;
       this.counter.Play_nhac.Photo = this.counter.domain_Backend + i.poster;
+      this.counter.Pause_Start = true;
+    },
+    Get_data_song_1(i) {
+      this.counter.Play_nhac.URL = i.mp3_file;
+      this.counter.Play_nhac.Name_song = i.name;
+      this.counter.Play_nhac.Name_artist = i.artist;
+      this.counter.Play_nhac.Photo = i.poster;
       this.counter.Pause_Start = true;
     },
     Play_Video() {
@@ -170,7 +196,8 @@ export default {
 
 <style>
 #cjss::-webkit-scrollbar {
-  width: 10px; /* Chiều rộng vùng chứa scrollbar */
+  width: 5px;
+  height: 8px; /* Chiều rộng vùng chứa scrollbar */
 }
 #cjss::-webkit-scrollbar-track {
   background: #393636; /* Màu nền ngoài của thanh scrollbar */
@@ -182,5 +209,27 @@ export default {
 }
 #cjss::-webkit-scrollbar-thumb:hover {
   background-color: #655f58; /* Hiệu ứng di chuột đổi màu*/
+}
+
+#cjss1::-webkit-scrollbar {
+  width: 5px;
+  height: 8px; /* Chiều rộng vùng chứa scrollbar */
+}
+#cjss1::-webkit-scrollbar-track {
+  background: #393636; /* Màu nền ngoài của thanh scrollbar */
+}
+#cjss1::-webkit-scrollbar-thumb {
+  background-color: #595857; /* Màu của thanh cuộn (scroll thumb) */
+  border-radius: 5px; /* Bo góc scroll thumb */
+  /* border: 2px solid #ccc;  Không hỗ trợ padding, margin, transition nên dùng viền cùng màu nên để padding scroll thumb */
+}
+#cjss1::-webkit-scrollbar-thumb:hover {
+  background-color: #655f58; /* Hiệu ứng di chuột đổi màu*/
+}
+
+#video {
+  transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg); /* Safari and Chrome */
+  -moz-transform: rotateY(180deg); /* Firefox */
 }
 </style>
