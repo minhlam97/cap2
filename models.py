@@ -41,11 +41,11 @@ class SongMood(models.Model):
 
         return self.mood
 
-# class UserFollowing(models.Model):
+class UserFollowing(models.Model):
     
-#     user_id = models.ForeignKey(to=User, related_name="following", on_delete=models.CASCADE, blank=True, null=True)
-#     following_user_id = models.ForeignKey(to=User, related_name="followers", on_delete=models.CASCADE, blank=True, null=True)
-#     created = models.DateTimeField(auto_now_add=True)
+    user_id = models.ForeignKey(to=User, related_name="following", on_delete=models.CASCADE, blank=True, null=True)
+    following_user_id = models.ForeignKey(to=User, related_name="followers", on_delete=models.CASCADE, blank=True, null=True)
+    created = models.DateTimeField(auto_now_add=True)
 
 class Song(models.Model):
 
