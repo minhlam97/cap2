@@ -7,23 +7,21 @@ import time
 import playsound
 import wikipedia
 
-language = 'vi'
-wikipedia.set_lang('vi')
-friday=pyttsx3.init()
-voices = friday.getProperty('voices')
-# for voice in voices:
-#     if voice.languages[1] == 'vi':
-#         friday.setProperty('voice', voice.id)
-#         break
+# wikipedia.set_lang('vi')
+# language = 'vi'
 
-friday.setProperty('voice', voices[1].id)
-
+bot=pyttsx3.init()
+voices = bot.getProperty('voices')
+# vi_voice_id = "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech\Voices\Tokens\MSTTS_V110_viVN_An"
+bot.setProperty('voice', voices[1].id)
+# friday.say("chào các bạn")
+# friday.runAndWait()
 
 def speak(audio):
     
     print('Bot: ' + audio)
-    friday.say(audio)
-    friday.runAndWait()
+    bot.say(audio)
+    bot.runAndWait()
    
     
 def time():
@@ -48,10 +46,10 @@ def command():
         c.pause_threshold=2
         audio=c.listen(source)
     try:
-        query = c.recognize_google(audio,language='vi-VN')
+        query = c.recognize_google(audio,language='vi')
         print("Tôi: "+query)
     except sr.UnknownValueError:
-        print('Xin lỗi, tôi không hiểu. Hãy nhập vào đây')
+        speak('Xin lỗi, tôi không hiểu. Hãy nhập vào đây')
         query = str(input('Yêu cầu của bạn: '))
     return query
 
@@ -62,23 +60,27 @@ if __name__  =="__main__":
         language='vi'
         query=command().lower()
         if "google" in query:
-            speak("What should I search,boss")
+            speak("Bạn muốn tôi tìm gì")
             search=command().lower()
             url = f"https://google.com/search?q={search}"
             wb.get().open(url)
-            speak(f'Here is your {search} on google')
+            speak(f'Đây là {search} trên google')
         
         elif "youtube" in query:
             speak("Bạn muốn tôi tìm gì")
             search=command().lower()
             url = f"https://youtube.com/search?q={search}"
             wb.get().open(url)
-            speak(f'Here is your {search} on youtube')
+            speak(f'Đây là {search} trên youtube')
 
-        elif "quit" in query:
-            speak("Tôi is off. Goodbye boss")
-            quit()
+        elif query:
+            wikipedia.set_lang("vi")
+            que= wikipedia.summary(query, sentences=1)
+            speak(que)
 
-        elif 'time' in query:
-            time()
+        # elif 'mấy giờ' in query:
+        #     time()
             
+        elif "tạm biệt" in query:
+            speak("Tạm biệt bạn, Hẹn gặp lại")
+            quit()
