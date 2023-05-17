@@ -1,12 +1,10 @@
 <template>
-  <div
-    class="flex flex-col text-white min-h-screen px-5 py-5 max-w-screen w-full gap-5"
-  >
+  <div class="flex flex-col min-h-screen px-5 py-5 max-w-screen w-full gap-5">
     <div class="flex flex-col w-full gap-3">
-      <div class="flex gap-1 text-bold items-center">
+      <div class="flex gap-1 text-bold items-center text-gray-200">
         <h1>Xin chào</h1>
         <h1 class="text-sky-600">{{ counter.Data_User.username }}</h1>
-        <h1>, nghe nhạc</h1>
+        <h1>, danh sách phát gần đây</h1>
       </div>
       <div id="cjss1" class="flex w-full items-center overflow-x-auto">
         <div
@@ -29,7 +27,7 @@
     </div>
     <div class="flex min-h-full grow gap-5 overflow-auto">
       <div class="flex flex-col w-2/3">
-        <div id="cjss" class="flex flex-col overflow-auto">
+        <div id="cjss" class="flex flex-col overflow-auto text-gray-200">
           <h1 class="text-[18px]">Bài hát dựa trên tâm trạng của bạn</h1>
           <div class="flex items-center gap-2 min-h-[50px]">
             <h1 class="text-[16px]">Danh sách bài hát</h1>
