@@ -1,6 +1,6 @@
 <template>
-  <div class="text-white h-full w-full flex flex-col">
-    <div id="cjss" class="h-[300px] w-full flex flex-col overflow-auto">
+  <div class="text-white h-full w-full flex flex-col px-5 py-5">
+    <div id="cjss" class="h-[300px] w-full flex flex-col overflow-y-auto">
       <div
         v-for="(i, index) in counter.Data_Search_Song.Data"
         class="flex text-gray-100 border-b-[1px] border-gray-800 py-3 items-center"
@@ -29,7 +29,7 @@
           </div>
         </div>
         <h1 class="w-[20%]"></h1>
-        <div class="w-[10%] cursor-pointer">
+        <div class="w-[10%] flex cursor-pointer">
           <svg
             v-show="i.love == 'love'"
             v-on:click="
@@ -58,14 +58,17 @@
           </svg>
           <svg
             v-show="i.love == 1"
-            v-on:click="counter.delete_song_love(i.name)"
+            v-on:click="
+              counter.delete_song_love(i.name);
+              i.love = 'love';
+            "
             role="img"
             height="16"
             width="16"
             aria-hidden="true"
             viewBox="0 0 16 16"
             data-encore-id="icon"
-            class="Svg-sc-ytk21e-0 gQUQL absolute fill-green-500"
+            class="Svg-sc-ytk21e-0 gQUQL fill-green-500"
           >
             <path
               d="M15.724 4.22A4.313 4.313 0 0 0 12.192.814a4.269 4.269 0 0 0-3.622 1.13.837.837 0 0 1-1.14 0 4.272 4.272 0 0 0-6.21 5.855l5.916 7.05a1.128 1.128 0 0 0 1.727 0l5.916-7.05a4.228 4.228 0 0 0 .945-3.577z"
@@ -78,7 +81,7 @@
         </div>
       </div>
     </div>
-
+    <!-- <h1>{{ counter.hhhh}}</h1> -->
     <h1
       v-show="counter.Search_Song == ''"
       class="text-[20px] text-gray-200 font-bold my-5"
@@ -363,7 +366,6 @@
         />
       </a>
     </div>
-
     <!-- <h1 class="text-gray-200">{{ counter.Data_Search_Song.Data }}</h1> -->
   </div>
 </template>
@@ -421,7 +423,7 @@ export default {
   height: 8px; /* Chiều rộng vùng chứa scrollbar */
 }
 #cjss::-webkit-scrollbar-track {
-  background: #393636; /* M ủa thanh scrollbar */
+  background: #393636; /* Màu nền ngoài của thanh scrollbar */
 }
 #cjss::-webkit-scrollbar-thumb {
   background-color: #595857; /* Màu của thanh cuộn (scroll thumb) */
