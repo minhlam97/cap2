@@ -1,0 +1,30 @@
+import os
+import time
+import requests
+from selenium import webdriver
+
+driver = webdriver.Chrome()
+driver.get('https://dl3.parsiane.ir/music/a/adele/')
+
+time.sleep(5)
+
+folder_path = 'C:\\Users\\OS\\OneDrive\\Máy tính\\CAP2\\lam\\Songs\\Adele'
+if not os.path.exists(folder_path):
+    os.makedirs(folder_path)
+
+mp3_links = []
+elems = driver.find_elements_by_tag_name('a')
+for elem in elems:
+    link = elem.get_attribute('href')
+    if link.endswith('.mp3'):
+        mp3_links.append(link)
+
+for link in mp3_links:
+    file_name = os.path.basename(link)
+    file_path = os.path.join(folder_path, file_name)
+    response = requests.get(link)
+    with open(file_path, 'wb') as f:
+        f.write(response.content)
+
+driver.quit()
+url = "https://dl2.beelody.com/Free/2021/7/Anne-Marie%20-%20Therapy%20%282021%29%20%5BBeelody%5D/"
